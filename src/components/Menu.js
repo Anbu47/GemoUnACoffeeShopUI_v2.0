@@ -2,10 +2,14 @@
 import { Link, Routes, Route, useParams } from 'react-router-dom';
 import { ItemPage } from './ItemPage.js';
 import './Menu.css';
+import { Drawer, Button } from 'antd';
+import 'antd/dist/antd.js';
 
 export class Menu extends Component {
     state = {
         menuData: [],
+        selectedItem: null, // Store the selected item data
+        drawerVisible: false, // Control the visibility of the drawer
     };
 
     componentDidMount() {
@@ -15,12 +19,25 @@ export class Menu extends Component {
             .then((data) => this.setState({ menuData: data }));
     }
 
-    handleButtonClick = (itemID) => {
-        this.props.history.push(`/drinks/${itemID}`);
+    handleButtonClick = (id) => {
+        // Fetch the data for the selected item using the itemID
+        fetch(`https://unacoffeeshopbe.onrender.com/api/data/getItemData/${id}`)
+            .then((response) => response.json())
+            .then((data) => {
+                // Update the state with the selected item data
+                this.setState({
+                    selectedItem: data,
+                    drawerVisible: true, // Show the drawer
+                });
+            });
+    };
+
+    closeDrawer = () => {
+        this.setState({ drawerVisible: false }); // Hide the drawer
     };
 
     render() {
-        const { menuData } = this.state;
+        const { menuData, selectedItem, drawerVisible } = this.state;
 
         return (
             <div className="menu">
@@ -41,7 +58,10 @@ export class Menu extends Component {
                                             <Link to={`/drinks/${item.ID}`} className="item-link">
                                                 <div className="item-wrapper">
                                                     <img
-                                                        src={item.ImageURL.replace('/file/d/', '/uc?export=view&id=').replace('/preview', '')}
+                                                        src={item.ImageURL.replace('/file/d/', '/uc?export=view&id=').replace(
+                                                            '/preview',
+                                                            ''
+                                                        )}
                                                         alt={item.Name}
                                                         className="item-image"
                                                     />
@@ -77,7 +97,10 @@ export class Menu extends Component {
                                             <Link to={`/foods/${item.ID}`} className="item-link">
                                                 <div className="item-wrapper">
                                                     <img
-                                                        src={item.ImageURL.replace('/file/d/', '/uc?export=view&id=').replace('/preview', '')}
+                                                        src={item.ImageURL.replace('/file/d/', '/uc?export=view&id=').replace(
+                                                            '/preview',
+                                                            ''
+                                                        )}
                                                         alt={item.Name}
                                                         className="item-image"
                                                     />
@@ -95,6 +118,33 @@ export class Menu extends Component {
                             ))}
                     </ul>
                 </div>
+
+                {/* Render the item details in a Drawer */}
+                <Drawer
+                    visible={drawerVisible}
+                    onClose={this.closeDrawer}
+                    title={selectedItem && selectedItem.Name}
+                >
+                    {selectedItem && (
+                        <div>
+                            <h3>{selectedItem.Name}</h3>
+                            <p>{selectedItem.Description}</p>
+                            <p>Base Price: ${selectedItem.BasePrice.toFixed(2)}</p>
+                            {selectedItem.Decorators && selectedItem.Decorators.length > 0 && (
+                                <div>
+                                    <h4>Decorators:</h4>
+                                    <ul>
+                                        {selectedItem.Decorators.map((decorator) => (
+                                            <li key={decorator.ID}>
+                                                {decorator.Name} - ${decorator.Price.toFixed(2)}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </Drawer>
             </div>
         );
     }
