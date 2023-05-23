@@ -1,12 +1,11 @@
 ﻿import React, { Component } from 'react';
-import { Link, Route, Routes, withRouter } from 'react-router-dom';
+import { Link, Routes, Route, useParams } from 'react-router-dom';
 import { ItemPage } from './ItemPage.js';
 import './Menu.css';
 
 export class Menu extends Component {
     state = {
         menuData: [],
-        selectedItemID: null,
     };
 
     componentDidMount() {
@@ -17,7 +16,6 @@ export class Menu extends Component {
     }
 
     handleButtonClick = (itemID) => {
-        this.setState({ selectedItemID: itemID });
         this.props.history.push(`/drinks/${itemID}`);
     };
 
@@ -34,7 +32,7 @@ export class Menu extends Component {
                             .map((item) => (
                                 <li key={item.ID}>
                                     <div className="item-details">
-                                        <div className="item-info ">
+                                        <div className="item-info">
                                             <h3>{item.Name}</h3>
                                             <p className="description">{item.Description}</p>
                                             <p className="price">${item.BasePrice.toFixed(2)}</p>
@@ -97,11 +95,6 @@ export class Menu extends Component {
                             ))}
                     </ul>
                 </div>
-
-                <Routes>
-                    <Route path="/drinks/:id" element={<ItemPage />} />
-                    <Route path="/foods/:id" element={<ItemPage />} />
-                </Routes>
             </div>
         );
     }

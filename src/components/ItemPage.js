@@ -9,7 +9,7 @@ export class ItemPage extends Component {
 
     componentDidMount() {
         const { match } = this.props;
-        const { id } = match.params;
+        const { id } = this.props.match.params;
 
         // Fetch the item details based on the ID
         fetch(`https://unacoffeeshopbe.onrender.com/api/data/getItemData/${id}`)
