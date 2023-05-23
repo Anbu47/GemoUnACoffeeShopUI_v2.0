@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 export class ItemPage extends Component {
     state = {

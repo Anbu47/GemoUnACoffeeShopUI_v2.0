@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Link, Route, Routes, withRouter } from 'react-router-dom';
 import { ItemPage } from './ItemPage.js';
 import './Menu.css';
 
@@ -17,9 +17,8 @@ export class Menu extends Component {
     }
 
     handleButtonClick = (itemID) => {
-        // Handle the button click event for a specific item
         this.setState({ selectedItemID: itemID });
-        // You can perform any desired action here
+        this.props.history.push(`/drinks/${itemID}`);
     };
 
     render() {
@@ -100,8 +99,8 @@ export class Menu extends Component {
                 </div>
 
                 <Routes>
-                    <Route path="/drinks/:id" component={ItemPage} />
-                    <Route path="/foods/:id" component={ItemPage} />
+                    <Route path="/drinks/:id" element={<ItemPage />} />
+                    <Route path="/foods/:id" element={<ItemPage />} />
                 </Routes>
             </div>
         );

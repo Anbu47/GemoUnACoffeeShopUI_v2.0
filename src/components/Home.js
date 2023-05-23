@@ -88,7 +88,7 @@ export class Home extends Component {
                                     <label>Message</label>
                                     <textarea className="form-control" rows="4"></textarea>
                                 </div>
-                                <button type="submit" className="btn btn-primary">Send Message</button>
+                                <button type="submit" className="btn btn-primary btn-lg d-inline-block">Send Message</button>
                             </form>
                         </div>
                     </div>
