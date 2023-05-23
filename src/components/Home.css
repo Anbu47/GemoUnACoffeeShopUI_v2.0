@@ -29,10 +29,6 @@ body {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-check for me this
-"body {
-background-color: #f8f9fa;
-}
 
 .hero-image {
     background-image: url('https://i.fbcd.co/products/original/img-2589-916de7b33515f0a04eb9d75a93489a699537d20b386b4b547135d913e545a4da.jpg');
@@ -88,7 +84,6 @@ background-color: #f8f9fa;
     text-align: center;
 }
 
-"
 
 .footer {
     background-color: #343a40;
