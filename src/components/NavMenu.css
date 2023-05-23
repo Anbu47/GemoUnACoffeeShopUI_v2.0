@@ -1,0 +1,52 @@
+﻿:root {
+    --color-pastel-primary: #9a77ff; /* pastel purple */
+    --color-pastel-secondary: #66b2b2; /* pastel blue-green */
+    --color-pastel-tertiary: #ffb266; /* pastel orange */
+    --color-pastel-quaternary: #ffb8b8; /* pastel pink */
+}
+
+/* Navigation Menu */
+header {
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    background-color: var(--color-pastel-primary);
+}
+
+.navbar-brand {
+    color: #fff;
+}
+
+.nav-link {
+    color: #fff;
+}
+
+/* Responsive Styling */
+.navbar-toggler {
+    border-color: #fff;
+}
+
+/* Interactivity */
+.navbar-toggler-icon {
+    background-color: #fff;
+}
+
+.nav-link:hover {
+    color: #ccc;
+}
+
+/* Media Queries */
+@media (max-width: 767px) {
+    .navbar-nav {
+        flex-direction: column;
+    }
+
+    .nav-item {
+        margin-bottom: 10px;
+    }
+
+    .navbar-toggler {
+        margin-right: 0;
+    }
+}

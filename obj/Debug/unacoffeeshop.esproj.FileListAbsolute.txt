@@ -1,0 +1,2 @@
+C:\Users\USER\Desktop\Despressing\DepressingGemoCoffeeShopUI\unacoffeeshop\obj\Debug\unacoffeeshop.esproj.SuggestedBindingRedirects.cache
+C:\Users\USER\Desktop\Despressing\DepressingGemoCoffeeShopUI\unacoffeeshop\obj\Debug\unacoffeeshop.esproj.CoreCompileInputs.cache

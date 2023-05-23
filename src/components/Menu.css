@@ -1,0 +1,165 @@
+﻿.menu {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    background-image: url('https://img.freepik.com/premium-photo/3d-rendered-vertical-soft-dreamy-pastel-clouds-with-hanging-stars-wallpaper_490107-202.jpg?w=2000');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+}
+
+.category {
+    flex-basis: 50%;
+    max-width: 500px;
+    padding: 10px;
+}
+
+.item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.item-link {
+    margin-top: auto;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.item-link {
+    display: block;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+}
+
+    .button-container button {
+        margin-left: 10px;
+    }
+
+button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 24px;
+    color: #fff;
+    background-color: #777;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    button:hover {
+        background-color: #999;
+    }
+
+.btn-pastel-primary {
+    background-color: #ff9b9e;
+    color: #fff;
+}
+
+    .btn-pastel-primary:hover {
+        background-color: #ff7679;
+    }
+
+.btn-pastel-secondary {
+    background-color: #9acff2;
+    color: #fff;
+}
+
+    .btn-pastel-secondary:hover {
+        background-color: #78b5ed;
+    }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .category {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .category {
+        flex-basis: 100%;
+        max-width: 100%;
+        padding: 5px;
+    }
+
+    .item-image {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 5px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
+    .price {
+        font-size: 12px;
+    }
+
+    button {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+    }
+}
