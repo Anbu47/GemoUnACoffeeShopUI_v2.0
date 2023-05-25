@@ -9,7 +9,7 @@ export class Menu extends Component {
         menuData: [],
         selectedItem: null,
         drawerOpen: false,
-        decoratorData: null,
+        Decorators: null,
     };
 
     componentDidMount() {
@@ -37,6 +37,12 @@ export class Menu extends Component {
     };
 
     fetchDecoratorData = (decoratorIDs) => {
+        if (!decoratorIDs) {
+            // Handle the case where decoratorIDs is undefined
+            this.setState({ Decorators: [] });
+            return;
+        }
+
         const promises = decoratorIDs.map((id) =>
             fetch(`https://unacoffeeshopbe.onrender.com/api/data/getDecoratorData${id}`)
                 .then((response) => response.json())
@@ -50,8 +56,8 @@ export class Menu extends Component {
                 })
         );
 
-        Promise.all(promises).then((decoratorData) => {
-            this.setState({ decoratorData });
+        Promise.all(promises).then((Decorators) => {
+            this.setState({ Decorators });
         });
     };
 
@@ -60,7 +66,7 @@ export class Menu extends Component {
     };
 
     render() {
-        const { menuData, selectedItem, drawerOpen, decoratorData } = this.state;
+        const { menuData, selectedItem, drawerOpen, Decorators } = this.state;
 
         return (
             <div className="menu">
@@ -147,16 +153,16 @@ export class Menu extends Component {
                     onClose={this.closeDrawer}
                     title={selectedItem && selectedItem.Name}
                 >
-                    {selectedItem && (
+                    {selectedItem ? (
                         <div>
                             <h3>{selectedItem.Name}</h3>
                             <p>{selectedItem.Description}</p>
                             <p>Base Price: ${selectedItem.BasePrice.toFixed(2)}</p>
-                            {decoratorData && decoratorData.length > 0 && (
+                            {Decorators && Decorators.length > 0 && (
                                 <div>
                                     <h4>Decorators:</h4>
                                     <ul>
-                                        {decoratorData.map((decorator) => (
+                                        {Decorators.map((decorator) => (
                                             <li key={decorator.ID}>
                                                 {decorator.Name} - ${decorator.Price.toFixed(2)}
                                             </li>
@@ -165,9 +171,13 @@ export class Menu extends Component {
                                 </div>
                             )}
                         </div>
+                    ) : (
+                        <div>No item selected</div>
                     )}
                 </Drawer>
             </div>
         );
     }
 }
+
+
