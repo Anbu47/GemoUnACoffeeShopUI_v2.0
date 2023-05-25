@@ -24,8 +24,8 @@ export class Admin extends Component {
 
         // Prepare the request body
         const requestBody = {
-            Name: accountID,
-            Pass: password,
+            accountID: accountID,
+            password: password
         };
 
         // Make the API call

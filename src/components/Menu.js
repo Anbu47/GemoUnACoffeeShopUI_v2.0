@@ -1,43 +1,66 @@
 ﻿import React, { Component } from 'react';
-import { Link, Routes, Route, useParams } from 'react-router-dom';
-import { ItemPage } from './ItemPage.js';
-import './Menu.css';
-import { Drawer, Button } from 'antd';
+import { Link } from 'react-router-dom';
+import { Drawer } from 'antd';
 import 'antd/dist/antd.js';
+import './Menu.css';
 
 export class Menu extends Component {
     state = {
         menuData: [],
-        selectedItem: null, // Store the selected item data
-        drawerVisible: false, // Control the visibility of the drawer
+        selectedItem: null,
+        drawerOpen: false,
+        decoratorData: null,
     };
 
     componentDidMount() {
-        // Fetch menu data from the REST API and update the state
         fetch('https://unacoffeeshopbe.onrender.com/api/data/getItemData')
             .then((response) => response.json())
-            .then((data) => this.setState({ menuData: data }));
+            .then((data) => {
+                console.log(data);
+                this.setState({ menuData: data });
+            });
     }
 
     handleButtonClick = (id) => {
-        // Fetch the data for the selected item using the itemID
-        fetch(`https://unacoffeeshopbe.onrender.com/api/data/getItemData/${id}`)
+        fetch(`https://unacoffeeshopbe.onrender.com/api/data/getItemData${id}`)
             .then((response) => response.json())
             .then((data) => {
-                // Update the state with the selected item data
-                this.setState({
-                    selectedItem: data,
-                    drawerVisible: true, // Show the drawer
-                });
+                console.log(data);
+                this.setState({ selectedItem: data, drawerOpen: true });
+
+                // Fetch decorator data
+                this.fetchDecoratorData(data.Decorators);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
             });
     };
 
+    fetchDecoratorData = (decoratorIDs) => {
+        const promises = decoratorIDs.map((id) =>
+            fetch(`https://unacoffeeshopbe.onrender.com/api/data/getDecoratorData${id}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    return data;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    return null;
+                })
+        );
+
+        Promise.all(promises).then((decoratorData) => {
+            this.setState({ decoratorData });
+        });
+    };
+
     closeDrawer = () => {
-        this.setState({ drawerVisible: false }); // Hide the drawer
+        this.setState({ drawerOpen: false });
     };
 
     render() {
-        const { menuData, selectedItem, drawerVisible } = this.state;
+        const { menuData, selectedItem, drawerOpen, decoratorData } = this.state;
 
         return (
             <div className="menu">
@@ -119,9 +142,8 @@ export class Menu extends Component {
                     </ul>
                 </div>
 
-                {/* Render the item details in a Drawer */}
                 <Drawer
-                    visible={drawerVisible}
+                    open={drawerOpen}
                     onClose={this.closeDrawer}
                     title={selectedItem && selectedItem.Name}
                 >
@@ -130,11 +152,11 @@ export class Menu extends Component {
                             <h3>{selectedItem.Name}</h3>
                             <p>{selectedItem.Description}</p>
                             <p>Base Price: ${selectedItem.BasePrice.toFixed(2)}</p>
-                            {selectedItem.Decorators && selectedItem.Decorators.length > 0 && (
+                            {decoratorData && decoratorData.length > 0 && (
                                 <div>
                                     <h4>Decorators:</h4>
                                     <ul>
-                                        {selectedItem.Decorators.map((decorator) => (
+                                        {decoratorData.map((decorator) => (
                                             <li key={decorator.ID}>
                                                 {decorator.Name} - ${decorator.Price.toFixed(2)}
                                             </li>
