@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Drawer } from 'antd';
+import { Drawer, Checkbox } from 'antd';
 import 'antd/dist/antd.js';
 import './Menu.css';
 
@@ -42,9 +42,8 @@ export class Menu extends Component {
             this.setState({ Decorators: [] });
             return;
         }
-
         const promises = decoratorIDs.map((id) =>
-            fetch(`https://unacoffeeshopbe.onrender.com/api/data/getDecoratorData${id}`)
+            fetch(`https://unacoffeeshopbe.onrender.com/api/data/getDecoratorData${id.ID}`)
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data);
@@ -164,7 +163,7 @@ export class Menu extends Component {
                                     <ul>
                                         {Decorators.map((decorator) => (
                                             <li key={decorator.ID}>
-                                                {decorator.Name} - ${decorator.Price.toFixed(2)}
+                                                <Checkbox>{decorator.Name}</Checkbox> - ${decorator.Price.toFixed(2)}
                                             </li>
                                         ))}
                                     </ul>
