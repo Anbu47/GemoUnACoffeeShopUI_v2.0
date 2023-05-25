@@ -47,6 +47,16 @@ export class NavMenu extends Component {
                                     Cart
                                 </Button>
                             </NavItem>
+                            <NavItem>
+                                <Button tag={Link} className="text-pastel-tertiary" to="/admin" color="pastel-tertiary">
+                                    Admin
+                                </Button>
+                            </NavItem>
+                            <NavItem>
+                                <Button tag={Link} className="text-pastel-tertiary" to="/item" color="pastel-tertiary">
+                                    Item Page
+                                </Button>
+                            </NavItem>
                         </Nav>
                     </Collapse>
                 </Navbar>

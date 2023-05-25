@@ -2,6 +2,7 @@
 import { Cart } from "./components/Cart";
 import { Home } from "./components/Home";
 import { ItemPage } from "./components/ItemPage";
+import { Admin } from "./components/Admin";
 
 
 const AppRoutes = [
@@ -20,6 +21,10 @@ const AppRoutes = [
     {
         path: '/item',
         element: <ItemPage />
+    },
+    {
+        path: '/admin',
+        element: <Admin />
     },
 ];
 
