@@ -1,15 +1,16 @@
 ﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Drawer, Checkbox } from 'antd';
 import 'antd/dist/antd.js';
 import './Menu.css';
+import { Drawer, Checkbox } from 'antd';
+import { ItemDrawer } from './ItemDrawer';
 
 export class Menu extends Component {
     state = {
         menuData: [],
         selectedItem: null,
         drawerOpen: false,
-        Decorators: null,
+        decorators: null,
     };
 
     componentDidMount() {
@@ -39,7 +40,7 @@ export class Menu extends Component {
     fetchDecoratorData = (decoratorIDs) => {
         if (!decoratorIDs) {
             // Handle the case where decoratorIDs is undefined
-            this.setState({ Decorators: [] });
+            this.setState({ decorators: [] });
             return;
         }
         const promises = decoratorIDs.map((id) =>
@@ -55,8 +56,8 @@ export class Menu extends Component {
                 })
         );
 
-        Promise.all(promises).then((Decorators) => {
-            this.setState({ Decorators });
+        Promise.all(promises).then((decorators) => {
+            this.setState({ decorators });
         });
     };
 
@@ -65,7 +66,7 @@ export class Menu extends Component {
     };
 
     render() {
-        const { menuData, selectedItem, drawerOpen, Decorators } = this.state;
+        const { menuData, selectedItem, drawerOpen, decorators } = this.state;
 
         return (
             <div className="menu">
@@ -147,36 +148,13 @@ export class Menu extends Component {
                     </ul>
                 </div>
 
-                <Drawer
-                    open={drawerOpen}
+                <ItemDrawer
+                    selectedItem={selectedItem}
+                    drawerOpen={drawerOpen}
                     onClose={this.closeDrawer}
-                    title={selectedItem && selectedItem.Name}
-                >
-                    {selectedItem ? (
-                        <div>
-                            <h3>{selectedItem.Name}</h3>
-                            <p>{selectedItem.Description}</p>
-                            <p>Base Price: ${selectedItem.BasePrice.toFixed(2)}</p>
-                            {Decorators && Decorators.length > 0 && (
-                                <div>
-                                    <h4>Decorators:</h4>
-                                    <ul>
-                                        {Decorators.map((decorator) => (
-                                            <li key={decorator.ID}>
-                                                <Checkbox>{decorator.Name}</Checkbox> - ${decorator.Price.toFixed(2)}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-                        </div>
-                    ) : (
-                        <div>No item selected</div>
-                    )}
-                </Drawer>
+                    decorators={decorators}
+                />
             </div>
         );
     }
 }
-
-

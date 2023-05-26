@@ -1,8 +1,9 @@
 ﻿:root {
-    --color-pastel-primary: #9a77ff; /* pastel purple */
+    --color-pastel-primary: #ffb8b8; /* pastel pink */
     --color-pastel-secondary: #66b2b2; /* pastel blue-green */
     --color-pastel-tertiary: #ffb266; /* pastel orange */
-    --color-pastel-quaternary: #ffb8b8; /* pastel pink */
+    --color-pastel-quaternary: #9a77ff; /* pastel purple */
+    --drawer-background: #1e1e1e; /* dark background color for the drawer */
 }
 
 /* Navigation Menu */
