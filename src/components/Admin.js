@@ -60,7 +60,6 @@ export class Admin extends Component {
 
   render() {
     const { accountID, password, loginError } = this.state
-    // Inside the `render()` method:
     const sanitizedUsername = DOMPurify.sanitize(accountID)
     const sanitizedPassword = DOMPurify.sanitize(password)
     return (
