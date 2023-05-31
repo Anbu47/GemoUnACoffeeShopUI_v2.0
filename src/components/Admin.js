@@ -36,6 +36,8 @@ export class Admin extends Component {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        "Content-Security-Policy":
+          "default-src 'self'; script-src 'self'; object-src 'none'; style-src 'self'; img-src 'self'; media-src 'self'; frame-src 'none'; font-src 'self'; connect-src 'self'",
       },
       body: JSON.stringify(requestBody),
     })
