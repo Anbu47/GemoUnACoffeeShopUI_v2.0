@@ -43,7 +43,7 @@ export class Home extends Component {
                   every day to satisfy your cravings.
                 </p>
                 <a href="javascript:void(0)" className="btn btn-secondary">
-                  Learn More
+                  Learn MoreF
                 </a>
               </div>
             </div>

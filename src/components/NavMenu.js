@@ -82,7 +82,7 @@ export class NavMenu extends Component {
                 <Button
                   tag={Link}
                   className="text-pastel-tertiary"
-                  to="/admin"
+                  to="/admin2"
                   color="pastel-tertiary"
                 >
                   Admin

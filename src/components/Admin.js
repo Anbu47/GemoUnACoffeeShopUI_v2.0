@@ -53,6 +53,7 @@ export class Admin extends Component {
           // Failed login
           this.setState({ loginError: true })
           console.log("Login failed")
+          window.alert("Login failed. Please try again.")
         }
       })
       .catch((error) => {
@@ -62,41 +63,48 @@ export class Admin extends Component {
 
   render() {
     const { accountID, password, loginError } = this.state
+
     const sanitizedUsername = DOMPurify.sanitize(accountID)
     const sanitizedPassword = DOMPurify.sanitize(password)
     return (
-      <div className="container">
-        <h1>Admin Login</h1>
-        <form onSubmit={this.handleLogin}>
-          <div className="form-group">
-            <label>Account ID</label>
-            <input
-              type="text"
-              className="form-control"
-              value={sanitizedUsername}
-              onChange={this.handleUsername}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control"
-              value={sanitizedPassword}
-              onChange={this.handlePassword}
-              required
-            />
-          </div>
-          {loginError && (
-            <p className="text-danger">
-              Invalid username or password. Please try again.
-            </p>
-          )}
-          <button type="submit" className="btn btn-primary">
-            Login
-          </button>
-        </form>
+      <div>
+        <div className="container">
+          <h1>Admin Login</h1>
+          <form onSubmit={this.handleLogin}>
+            <div className="form-group">
+              <label>Account ID</label>
+              <input
+                type="text"
+                className="form-control"
+                value={sanitizedUsername}
+                onChange={this.handleUsername}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                className="form-control"
+                value={sanitizedPassword}
+                onChange={this.handlePassword}
+                required
+              />
+            </div>
+            {loginError && (
+              <p className="text-danger">
+                Invalid username or password. Please try again.
+              </p>
+            )}
+            {!loginError && (
+              <p className="text-success">Login successful. Welcome!</p>
+            )}
+
+            <button type="submit" className="btn btn-primary">
+              Login
+            </button>
+          </form>
+        </div>
       </div>
     )
   }
