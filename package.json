@@ -23,6 +23,7 @@
     "reactstrap": "^9.1.10",
     "redux": "^4.2.1",
     "source-map-loader": "^4.0.1",
+    "uuidv4": "^6.2.13",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
