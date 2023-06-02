@@ -2,6 +2,8 @@
 
 import { Checkbox, Drawer } from "antd"
 import React, { Component } from "react"
+import { Link } from "react-router-dom"
+import { Button } from "reactstrap"
 
 export class ItemDrawer extends Component {
   constructor(props) {
@@ -9,6 +11,10 @@ export class ItemDrawer extends Component {
     this.state = {
       selectedDecorators: {},
     }
+  }
+  handleConfirm = (confirmed) => {
+    this.setState({ isOpen: false })
+    this.props.onConfirm(confirmed)
   }
 
   handleDecoratorChange = (groupId, decoratorId) => {
@@ -89,6 +95,33 @@ export class ItemDrawer extends Component {
                 </ul>
               </div>
             )}
+            <div>
+              <button
+                onClick={this.handleConfirm}
+                className="btn btn-primary"
+                color="pastel-tertiary"
+              >
+                Confirm
+              </button>
+
+              <Button
+                type="submit"
+                tag={Link}
+                className="btn btn-primary"
+                color="pastel-secondary"
+                to={"/newUser"}
+              >
+                Register New User
+              </Button>
+
+              <button
+                onClick={onClose}
+                className="btn btn-secondary ml-2"
+                color="pastel-secondary"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         ) : (
           <div className="item-drawer">No item selected</div>

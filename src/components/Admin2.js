@@ -46,6 +46,7 @@ export default class Admin2 extends React.Component {
           // Successful login
           this.setState({ loginError: false })
           console.log("Login successful")
+          window.location.href = "/userDetails" // Redirect to user details page
         } else {
           // Failed login
           this.setState({ loginError: true })
@@ -90,14 +91,9 @@ export default class Admin2 extends React.Component {
             </p>
           )}
 
-          <Button
-            tag={Link}
-            className="btn btn-primary"
-            to={loginError ? "/admin" : "/userDetails"}
-            color="pastel-tertiary"
-          >
+          <button type="submit" className="btn btn-primary">
             Login
-          </Button>
+          </button>
 
           <Button
             type="submit"
