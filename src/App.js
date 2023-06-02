@@ -5,8 +5,6 @@ import { Layout } from "./components/Layout"
 import { Provider } from "react-redux"
 import store from "./store"
 
-//import a css for this
-
 export default class App extends Component {
   static displayName = App.name
   render() {

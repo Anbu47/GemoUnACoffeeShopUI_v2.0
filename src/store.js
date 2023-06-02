@@ -1,7 +1,11 @@
 import { createStore } from "redux"
-import rootReducer from "../index"
+const initialState = {
+  // your initial state here
+}
 
-// Create Redux Store
-const store = createStore(rootReducer)
-
+function reducer(state = initialState, action) {
+  // handle state changes based on the action type
+  return state
+}
+const store = createStore(reducer)
 export default store
