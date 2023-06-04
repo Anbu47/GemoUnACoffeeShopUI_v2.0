@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 
+import axios from "axios"
+
 class Order extends Component {
   state = {
     orderData: [],
@@ -23,15 +25,28 @@ class Order extends Component {
     return (
       <div>
         <h2>Cart Order</h2>
-        <ul>
-          {orderData.map((item) => (
-            <li key={item.OrderID}>
-              <p>Description: {item.Description}</p>
-              <p>Cost: ${item.Cost.toFixed(2)}</p>
-              <p>Status: {item.Status}</p>
-            </li>
-          ))}
-        </ul>
+        <div className="card-body">
+          <div className="card mb-4">
+            <div className="card-body">
+              {orderData.map((item) => (
+                <div className="row border rounded mb-2" key={item.OrderID}>
+                  <p>Order By: {item.ProfileID}</p>
+
+                  <p>Description: {item.Description}</p>
+                  <p>Cost: ${item.Cost.toFixed(2)}</p>
+                  <p>Tax: 0.12</p>
+
+                  <p className="fw-bold mb-0"></p>
+                  <p className="text-muted mb-0">
+                    <span className="fw-bold me-4">Total</span> $ $
+                    {item.Cost.toFixed(2)}
+                  </p>
+                  <p>Status: {item.Status}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

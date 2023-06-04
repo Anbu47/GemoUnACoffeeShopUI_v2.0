@@ -72,7 +72,7 @@ export class NavMenu extends Component {
                 <Button
                   tag={Link}
                   className="text-pastel-tertiary"
-                  to="/cart"
+                  to="/order"
                   color="pastel-tertiary"
                 >
                   Cart
