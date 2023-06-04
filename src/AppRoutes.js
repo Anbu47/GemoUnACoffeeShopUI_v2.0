@@ -4,6 +4,7 @@ import { Cart } from "./components/Cart"
 import { Home } from "./components/Home"
 import { Menu } from "./components/Menu"
 import { NewUser } from "./components/NewUser"
+import Order from "./components/Order"
 import { UserDetails } from "./components/UserDetails"
 
 const AppRoutes = [
@@ -34,6 +35,10 @@ const AppRoutes = [
   {
     path: "/newUser",
     element: <NewUser />,
+  },
+  {
+    path: "/order",
+    element: <Order />,
   },
 ]
 

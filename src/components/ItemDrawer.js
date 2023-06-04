@@ -1,20 +1,47 @@
 ﻿import "./ItemDrawer.css"
 
 import { Checkbox, Drawer } from "antd"
-import React, { Component } from "react"
-import { Link } from "react-router-dom"
-import { Button } from "reactstrap"
 
-export class ItemDrawer extends Component {
+import React from "react"
+
+export class ItemDrawer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       selectedDecorators: {},
+      totalPrice: 0.0,
     }
   }
   handleConfirm = (confirmed) => {
+    const { selectedItem, decorators } = this.props
+    const { selectedDecorators } = this.state
+
+    // Calculate the base price of the item
+    const basePrice = selectedItem.BasePrice
+
+    // Calculate the total price including decorators
+    let totalPrice = basePrice
+    for (const groupId in selectedDecorators) {
+      const decoratorId = selectedDecorators[groupId]
+      const decorator = decorators.find(
+        (decorator) => decorator.ID === decoratorId
+      )
+      if (decorator) {
+        totalPrice += decorator.Price
+      }
+    }
+
+    // Create a new item object with the calculated total price
+    const newItem = {
+      ...selectedItem,
+      totalPrice: totalPrice.toFixed(2),
+    }
+
+    // Dispatch the addToCart action with the new item
+    this.props.addToCart(newItem)
+
+    // Close the drawer
     this.setState({ isOpen: false })
-    this.props.onConfirm(confirmed)
   }
 
   handleDecoratorChange = (groupId, decoratorId) => {
@@ -53,7 +80,7 @@ export class ItemDrawer extends Component {
 
     return (
       <Drawer
-        visible={drawerOpen}
+        open={drawerOpen}
         onClose={onClose}
         title={selectedItem && selectedItem.Name}
       >
@@ -103,16 +130,6 @@ export class ItemDrawer extends Component {
               >
                 Confirm
               </button>
-
-              <Button
-                type="submit"
-                tag={Link}
-                className="btn btn-primary"
-                color="pastel-secondary"
-                to={"/newUser"}
-              >
-                Register New User
-              </Button>
 
               <button
                 onClick={onClose}

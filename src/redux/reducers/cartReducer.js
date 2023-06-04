@@ -1,10 +1,12 @@
-import { v4 as uuidv4 } from "uuid"
-
 import {
   ADD_TO_CART,
   CLEAR_CART,
   REMOVE_FROM_CART,
 } from "../actions/cartActions"
+
+import { ItemDrawer } from "../../components/ItemDrawer"
+import { connect } from "react-redux"
+import { v4 as uuidv4 } from "uuid"
 
 const initialState = {
   items: [],
@@ -14,6 +16,16 @@ const initialState = {
     totalCartPriceAfterTax: 0,
   },
 }
+
+// ...
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (item) => dispatch(ADD_TO_CART(item)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ItemDrawer)
 
 // Helper function to calculate the price
 const updatePrice = (items) => {
@@ -71,4 +83,4 @@ const cartReducer = (state = initialState, action) => {
   }
 }
 
-export default cartReducer
+//export default cartReducer

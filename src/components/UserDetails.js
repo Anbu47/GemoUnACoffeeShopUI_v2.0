@@ -6,12 +6,12 @@ export class UserDetails extends React.Component {
     this.state = {
       user: {
         _id: "",
-        username: "",
-        role: "",
-        fullName: "",
-        email: "",
-        phone: "",
-        address: "",
+        username: "Bang",
+        role: "Barista",
+        fullName: "Mach Dieu Bang",
+        email: "machdieubang2110@gmail.com",
+        phone: "090",
+        address: "TPHCM",
         picture: "",
       },
       isEditing: false,

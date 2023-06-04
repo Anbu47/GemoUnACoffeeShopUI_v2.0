@@ -156,6 +156,7 @@ export class Menu extends Component {
           drawerOpen={drawerOpen}
           onClose={this.closeDrawer}
           decorators={decorators}
+          addToCart={this.props.addToCart}
         />
       </div>
     )
