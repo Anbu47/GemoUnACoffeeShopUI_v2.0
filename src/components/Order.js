@@ -1,10 +1,12 @@
 import React, { Component } from "react"
 
+import Comment from "./Comment"
 import axios from "axios"
 
 class Order extends Component {
   state = {
     orderData: [],
+    showCommentSection: false,
   }
 
   componentDidMount() {
@@ -21,6 +23,7 @@ class Order extends Component {
 
   render() {
     const { orderData } = this.state
+    const { order, user, showCommentSection } = this.state
 
     return (
       <div>
@@ -42,6 +45,13 @@ class Order extends Component {
                     {item.Cost.toFixed(2)}
                   </p>
                   <p>Status: {item.Status}</p>
+                  <button
+                    className="btn btn-primary"
+                    onClick={this.toggleCommentSection}
+                  >
+                    {showCommentSection ? "Hide Comments" : "Show Comment"}
+                  </button>
+                  {showCommentSection && <Comment orderId={order._id} />}
                 </div>
               ))}
             </div>
