@@ -2,6 +2,7 @@
 import { Route, Routes } from "react-router-dom"
 
 import AppRoutes from "./AppRoutes"
+import { IntlProvider } from "react-intl"
 import { Layout } from "./components/Layout"
 import { Provider } from "react-redux"
 import store from "./store"
@@ -11,16 +12,18 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <React.StrictMode>
-          <Layout>
-            <Routes>
-              {AppRoutes.map((route, index) => {
-                const { element, ...rest } = route
-                return <Route key={index} {...rest} element={element} />
-              })}
-            </Routes>
-          </Layout>
-        </React.StrictMode>
+        <IntlProvider locale="en">
+          <React.StrictMode>
+            <Layout>
+              <Routes>
+                {AppRoutes.map((route, index) => {
+                  const { element, ...rest } = route
+                  return <Route key={index} {...rest} element={element} />
+                })}
+              </Routes>
+            </Layout>
+          </React.StrictMode>
+        </IntlProvider>
       </Provider>
     )
   }

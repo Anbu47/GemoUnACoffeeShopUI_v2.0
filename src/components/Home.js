@@ -4,7 +4,15 @@ import React, { Component } from "react"
 
 export class Home extends Component {
   static displayName = Home.name
-
+  // Language
+  getLocaleMessages(locale) {
+    switch (locale) {
+      case "vn":
+        return require("../lang/vn.json")
+      default:
+        return require("../lang/en.json")
+    }
+  }
   render() {
     return (
       <div className="container">

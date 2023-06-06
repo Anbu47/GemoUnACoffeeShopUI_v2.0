@@ -21,19 +21,19 @@ export default function Comment({ user, orderId }) {
   const userId = user._id
 
   useEffect(() => {
-    fetchComments()
-  }, [])
-
-  const fetchComments = async () => {
-    try {
-      const response = await axios.get(
-        `${backendUrl}/users/${userId}/orders/${orderId}/comments`
-      )
-      setComments(response.data)
-    } catch (error) {
-      console.log(error)
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(
+          `${backendUrl}/users/${userId}/orders/${orderId}/comments`
+        )
+        setComments(response.data)
+      } catch (error) {
+        console.log(error)
+      }
     }
-  }
+
+    fetchComments()
+  }, [orderId, userId])
 
   const addComment = async () => {
     try {

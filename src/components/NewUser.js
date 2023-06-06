@@ -1,6 +1,6 @@
-import React from "react"
-import { Link } from "react-router-dom"
 import { Alert } from "reactstrap"
+import { Link } from "react-router-dom"
+import React from "react"
 
 export class NewUser extends React.Component {
   constructor(props) {
