@@ -40,7 +40,7 @@ export class ItemDrawer extends React.Component {
     // Dispatch the addToCart action with the new item
     this.props.addToCart(newItem)
 
-    // Close the drawer
+
     this.setState({ isOpen: false })
   }
 
@@ -62,7 +62,16 @@ export class ItemDrawer extends React.Component {
       }
     })
   }
+  handleDrawerClose = () => {
+    // Clear the selected decorators
+    this.setState({
+      selectedDecorators: {},
+    });
 
+    // Call the onClose prop to close the drawer
+    this.props.onClose();
+  };
+  
   render() {
     const { selectedItem, drawerOpen, onClose, decorators } = this.props
     const { selectedDecorators } = this.state
@@ -132,7 +141,7 @@ export class ItemDrawer extends React.Component {
               </button>
 
               <button
-                onClick={onClose}
+                onClick={this.handleDrawerClose}
                 className="btn btn-secondary ml-2"
                 color="pastel-secondary"
               >

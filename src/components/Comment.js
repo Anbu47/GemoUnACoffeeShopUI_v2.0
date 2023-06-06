@@ -11,6 +11,7 @@ import {
 import React, { useEffect, useState } from "react"
 
 import axios from "axios"
+import faker from "faker"; // Import the faker library
 
 const backendUrl =
   process.env.REACT_APP_BACKEND_URL || "http://localhost:8005/api"
@@ -18,30 +19,36 @@ const backendUrl =
 export default function Comment({ user, orderId }) {
   const [comments, setComments] = useState([])
   const [newComment, setNewComment] = useState("")
-  const userId = user._id
 
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await axios.get(
-          `${backendUrl}/users/${userId}/orders/${orderId}/comments`
-        )
-        setComments(response.data)
+        
+        // setComments(response.data)
       } catch (error) {
         console.log(error)
       }
     }
 
-    fetchComments()
-  }, [orderId, userId])
+    //fetchComments()
+        // Generate fake comments for demonstration
+        const fakeComments = Array.from({ length: 5 }, () => ({
+          _id: faker.datatype.uuid(),
+          username: faker.internet.userName(),
+          createdAt: faker.date.past().toISOString(),
+          content: faker.lorem.paragraph(),
+        }));
+    
+        setComments(fakeComments);
+  }, [orderId])
 
   const addComment = async () => {
     try {
-      const response = await axios.post(
-        `${backendUrl}/users/${userId}/orders/${orderId}/comments`,
-        { content: newComment }
-      )
-      setComments(response.data)
+      // const response = await axios.post(
+      //   `${backendUrl}/users/$/orders/${orderId}/comments`,
+      //   { content: newComment }
+      // )
+      // setComments(response.data)
       setNewComment("")
     } catch (error) {
       console.log(error)
