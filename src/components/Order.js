@@ -72,8 +72,8 @@ class Order extends Component {
                       <span className="fw-bold me-4">Total</span>$
                       {totalPrice.toFixed(2)}
                     </p>
-                    <p>Status: {this.handleOrderStatus}</p>
-                                          <Rating value={item.Rating} /> {/* Display the rating */}
+                    <p>Status: {this.handleOrderStatus(Status)}</p>
+                    <Rating value={item.Rating} />
 
                     <button
                       className="btn btn-primary"
