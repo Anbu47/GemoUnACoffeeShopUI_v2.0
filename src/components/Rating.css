@@ -1,0 +1,32 @@
+.star {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  font-size: 24px;
+  color: yellow;
+}
+.filled-star::before {
+  content: "★";
+  animation: sparkly 1s infinite;
+}
+
+@keyframes sparkly {
+  0% {
+    color: yellow;
+    transform: scale(1);
+  }
+  50% {
+    color: gold;
+    transform: scale(1.2);
+  }
+  100% {
+    color: yellow;
+    transform: scale(1);
+  }
+}
+
+
+
+
+

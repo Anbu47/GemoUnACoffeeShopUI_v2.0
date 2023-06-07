@@ -5,7 +5,7 @@ import AppRoutes from "./AppRoutes"
 import { IntlProvider } from "react-intl"
 import { Layout } from "./components/Layout"
 import { Provider } from "react-redux"
-import store from "./store"
+import store from "./redux/store"
 
 export default class App extends Component {
   static displayName = App.name

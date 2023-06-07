@@ -1,37 +1,54 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 
-import Comment from "./Comment";
+import Comment from "./Comment"
+import Rating from "./Rating"
 
 class Order extends Component {
   state = {
     orderData: [],
     showCommentSection: false,
-  };
+    selectedOrderId: null, // New state variable to track the selected order ID
+  }
 
   componentDidMount() {
-    this.fetchOrderData();
+    this.fetchOrderData()
   }
 
   fetchOrderData = () => {
     fetch("https://unacoffeeshopbe.onrender.com/api/data/getCartOrderData")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        this.setState({ orderData: data });
+        console.log(data)
+        this.setState({ orderData: data })
       })
       .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
+        console.error("Error:", error)
+      })
+  }
 
-  toggleCommentSection = () => {
+  toggleCommentSection = (orderId) => {
     this.setState((prevState) => ({
       showCommentSection: !prevState.showCommentSection,
-    }));
-  };
+      selectedOrderId: orderId, // Set the selected order ID
+    }))
+  }
+  handleOrderStatus = (status) => {
+    switch (status) {
+      case 1:
+        return "pending"
+      case 2:
+        return "received / in progress"
+      case 3:
+        return "completed"
+      case 4:
+        return "cancelled"
+      default:
+        return ""
+    }
+  }
 
   render() {
-    const { orderData, showCommentSection } = this.state;
+    const { orderData, showCommentSection, selectedOrderId } = this.state
 
     return (
       <div>
@@ -40,9 +57,9 @@ class Order extends Component {
           <div className="card mb-4">
             <div className="card-body">
               {orderData.map((item) => {
-                const { OrderID, ProfileID, Description, Cost, Status } = item;
-                const tax = Cost * 0.0725;
-                const totalPrice = Cost + tax;
+                const { OrderID, ProfileID, Description, Cost, Status } = item
+                const tax = Cost * 0.0725
+                const totalPrice = Cost + tax
 
                 return (
                   <div className="row border rounded mb-2" key={OrderID}>
@@ -50,29 +67,32 @@ class Order extends Component {
                     <p>Description: {Description}</p>
                     <p>Cost: ${Cost.toFixed(2)}</p>
                     <p>Tax: ${tax.toFixed(2)}</p>
-
                     <p className="fw-bold mb-0"></p>
                     <p className="text-muted mb-0">
-                      <span className="fw-bold me-4">Total</span>
-                      ${totalPrice.toFixed(2)}
+                      <span className="fw-bold me-4">Total</span>$
+                      {totalPrice.toFixed(2)}
                     </p>
-                    <p>Status: {Status}</p>
+                    <p>Status: {this.handleOrderStatus}</p>
+                                          <Rating value={item.Rating} /> {/* Display the rating */}
+
                     <button
                       className="btn btn-primary"
                       onClick={this.toggleCommentSection}
                     >
-                      {showCommentSection ? "Hide Comments" : "Show Comment"}
+                      {showCommentSection && selectedOrderId === OrderID
+                        ? "Hide Comments"
+                        : "Show Comment"}
                     </button>
                     {showCommentSection && <Comment orderId={OrderID} />}
                   </div>
-                );
+                )
               })}
             </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Order;
+export default Order

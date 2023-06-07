@@ -1,9 +1,11 @@
 import React, { Component } from "react"
-// import { clearCart, removeFromCart } from "../../redux/actions/cartActions"
 
 import { Modal } from "reactstrap"
 import axios from "axios"
 import { connect } from "react-redux"
+
+// import { clearCart, removeFromCart } from "../../redux/actions/cartActions"
+
 export class Cart extends Component {
   constructor(props) {
     super(props)
@@ -25,7 +27,7 @@ export class Cart extends Component {
   }
   render() {
     const { cart } = this.props
-    const { items } = cart
+    //const { items } = cart
     return (
       <Modal
         show={this.state.isModalOpen}

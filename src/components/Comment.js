@@ -10,8 +10,7 @@ import {
 } from "mdb-react-ui-kit"
 import React, { useEffect, useState } from "react"
 
-import axios from "axios"
-import faker from "faker"; // Import the faker library
+import faker from "faker" // Import the faker library
 
 const backendUrl =
   process.env.REACT_APP_BACKEND_URL || "http://localhost:8005/api"
@@ -23,7 +22,6 @@ export default function Comment({ user, orderId }) {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        
         // setComments(response.data)
       } catch (error) {
         console.log(error)
@@ -31,15 +29,15 @@ export default function Comment({ user, orderId }) {
     }
 
     //fetchComments()
-        // Generate fake comments for demonstration
-        const fakeComments = Array.from({ length: 5 }, () => ({
-          _id: faker.datatype.uuid(),
-          username: faker.internet.userName(),
-          createdAt: faker.date.past().toISOString(),
-          content: faker.lorem.paragraph(),
-        }));
-    
-        setComments(fakeComments);
+    // Generate fake comments for demonstration
+    const fakeComments = Array.from({ length: 5 }, () => ({
+      _id: faker.datatype.uuid(),
+      username: faker.internet.userName(),
+      createdAt: faker.date.past().toISOString(),
+      content: faker.lorem.paragraph(),
+    }))
+
+    setComments(fakeComments)
   }, [orderId])
 
   const addComment = async () => {
@@ -71,7 +69,7 @@ export default function Comment({ user, orderId }) {
                       >
                         <MDBCardImage
                           className="rounded-circle shadow-1-strong me-3"
-                          src={comment.picture}
+                          src={""}
                           alt="avatar"
                           width="60"
                           height="60"
@@ -113,7 +111,7 @@ export default function Comment({ user, orderId }) {
                 <div className="d-flex flex-start w-100">
                   <MDBCardImage
                     className="rounded-circle shadow-1-strong me-3"
-                    src={user.picture}
+                    // src={user.picture}
                     alt="avatar"
                     width="40"
                     height="40"
